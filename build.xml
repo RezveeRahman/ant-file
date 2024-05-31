@@ -53,7 +53,9 @@ Classpath: ${classpath}" />
     <target name="clean"
             description="Cleans up project compilation."
     >
-        <Delete file="*.class" dir="" verbose="true"/>
+        <delete>
+            <fileset dir="${src.dir}" includes="/*.class" />
+        </delete>
     </target>
 </project>
 
