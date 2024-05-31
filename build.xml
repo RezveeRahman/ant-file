@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @Author: Rezvee Rahman -->
+<!-- @Last modified: 05/31/2024 -->
+
+<!-- ANT BUILD FILE -->
+<project
+    name="ant-template"
+    default="info"
+    basedir=".">
+
+    <description>
+        This is a template file for building java application
+    </description>
+
+    <!-- Properties -->
+    <!--
+        We can thing of these as variables. Also alot of the
+        properties follow the `Maven` file structure and directory
+        of a project.
+    -->
+    <property name="src.dir" location="src/main/java" />
+    <property name="resource.dir" location="src/main/resource" />
+    <property name="classpath" location="${src.dir}/classes" />
+    <property file="prop.txt" />
+
+    <!-- Targets -->
+    <target name="info"
+    description="
+        Default, get's information and prints it to the terminal"
+    >
+        
+    </target>
+
+
+    <!-- build project -->
+    <target name="build" description="Builds java project">
+        <echo message="Building project"/>
+        <echo message="project directory (source dir): ${src.dir}"/>
+        <echo message="class path directory (classpath dir): ${src.dir}/.classes" />
+        <echo message="Compilation target: ${src.dir}
+Classpath: ${classpath}" />
+        <mkdir dir="${classpath}"/>
+        <javac srcdir="${src.dir}"/>
+    </target>
+
+    <!-- jar project -->
+    <target name="jar" description="Creates a jar">
+
+    </target>
+
+    <!-- clean project -->
+    <target name="clean"
+            description="Cleans up project compilation."
+    >
+        <Delete file="*.class" dir="" verbose="true"/>
+    </target>
+</project>
+
