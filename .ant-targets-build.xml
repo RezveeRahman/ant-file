@@ -2,3 +2,4 @@ build
 clean
 info
 jar
+unit-test

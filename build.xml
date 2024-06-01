@@ -19,17 +19,25 @@
         properties follow the `Maven` file structure and directory
         of a project.
     -->
+    <property name="root.dir" location="." />
     <property name="src.dir" location="src/main/java" />
     <property name="resource.dir" location="src/main/resource" />
     <property name="classpath" location="${src.dir}/classes" />
     <property file="prop.txt" />
+
+    <!-- External Jar properties -->
+    <!-- CHANGE THIS PROPERTY LOCATION AND NAME -->
+    <!-- <property name="jar.dir" location="" /> -->
 
     <!-- Targets -->
     <target name="info"
     description="
         Default, get's information and prints it to the terminal"
     >
-        
+        <echo message="Project Name: ${ant.project.name}" />
+        <echo message="Project Directory: [${basedir}]" />
+        <echo message="Ant: version ${ant.version}" />
+        <echo message="Java-JDK-Version: ${ant.java.version}" />
     </target>
 
 
@@ -41,21 +49,31 @@
         <echo message="Compilation target: ${src.dir}
 Classpath: ${classpath}" />
         <mkdir dir="${classpath}"/>
-        <javac srcdir="${src.dir}"/>
+        <javac
+            srcdir="${src.dir}"
+            destdir="${classpath}"
+            />
+    </target>
+
+    <!-- Unit tests -->
+    <target name="unit-test" description="Runs unit test." depends="build">
+        <echo message="Starting to run unit tests" />
     </target>
 
     <!-- jar project -->
-    <target name="jar" description="Creates a jar">
-
+    <target name="jar" description="Creates a project `jar`.">
+        <echo message="Packaging project into a JAR file"/>
     </target>
 
     <!-- clean project -->
     <target name="clean"
             description="Cleans up project compilation."
     >
-        <delete>
-            <fileset dir="${src.dir}" includes="/*.class" />
+        <delete verbose="true">
+            <fileset dir="${classpath}" includes="*.class" />
+            <fileset dir="${root.dir}" includes="*.jar" />
         </delete>
     </target>
+
 </project>
 
